@@ -1,12 +1,11 @@
 .App {
   max-width: 860px;
   margin: 40px auto;
+  padding: 0 50px;
 }
 span {
-  position: absolute;
-  right: 525px;
-  top: 134px;
-  font-size: 25px;
+  display: flex;
+  justify-content: flex-end;
 }
 button {
   background: none;
