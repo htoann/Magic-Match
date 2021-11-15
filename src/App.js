@@ -27,7 +27,11 @@ function App() {
   };
 
   const handleChoice = (card) => {
-    choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
+    if (choiceOne) {
+      setChoiceTwo(card);
+    } else {
+      setChoiceOne(card);
+    }
   };
 
   const resetTurn = () => {
@@ -38,19 +42,21 @@ function App() {
 
   useEffect(() => {
     if (choiceOne && choiceTwo) {
-      if (choiceOne.src === choiceTwo.src) {
-        setCards((prev) => {
-          return prev.map((card) => {
-            if (card.src === choiceOne.src) {
-              return { ...card, matched: true };
-            } else {
-              return card;
-            }
+      if (choiceOne.id !== choiceTwo.id) {
+        if (choiceOne.src === choiceTwo.src) {
+          setCards((prev) => {
+            return prev.map((card) => {
+              if (card.src === choiceOne.src) {
+                return { ...card, matched: true };
+              } else {
+                return card;
+              }
+            });
           });
-        });
-        resetTurn();
-      } else {
-        setTimeout(() => resetTurn(), 500);
+          resetTurn();
+        } else {
+          setTimeout(() => resetTurn(), 500);
+        }
       }
     }
   }, [choiceOne, choiceTwo]);
